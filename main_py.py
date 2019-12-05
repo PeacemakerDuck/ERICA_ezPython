@@ -17,6 +17,7 @@ def create_board():#creating board array
         for j in range(0,8):
              board[i].append('ㆍ')
     return board
+def orthello():
+	pass
 board = create_board()
 show_board(board)
-
