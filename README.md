@@ -1,6 +1,6 @@
 ## ERICA_ezpy
 
-#~ezpy~
+#**ezpy**
 
 -> py(Python), 파이썬을 이용하여 ez(Easy), 쉽게 GitHub를 사용해보는 프로젝트이다.
 
