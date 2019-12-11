@@ -1,4 +1,23 @@
 #Othello
+def check_sel(board,x,y):
+    try :
+        if board[x][y]=='●'
+            if board[x-1][y-1]=='○':return True
+            if board[x-1][y+1]=='○':return True
+            if board[x][y-1]=='○':return True
+            if board[x][y+1]=='○':return True
+            if board[x+1][y-1]=='○':return True
+            if board[x+1][y]=='○':return True
+            if board[x+1][y+1]=='○':return True
+        if board[x][y]=='○'
+            if board[x-1][y-1]=='●':return True
+            if board[x-1][y]=='●':return True
+            if board[x-1][y+1]=='●':return True
+            if board[x][y-1]=='●':return True
+            if board[x][y+1]=='●':return True
+            if board[x+1][y-1]=='●':return True
+            if board[x+1][y]=='●':return True
+            if board[x+1][y+1]=='●':return True
 def show_board(board):
     k_1=['①','②','③','④','⑤','⑥','⑦','⑧']
     i=0
@@ -16,6 +35,10 @@ def create_board():#creating board array
     for i in range(0,8):
         for j in range(0,8):
              board[i].append('ㆍ')
+    board[3][4]='●'
+    board[4][3]='●'
+    board[3][3]='○'
+    board[4][4]='○'
     return board
 def cordinate_board(message,i,j):#receiving cordinate
     while True:
@@ -33,15 +56,39 @@ def cordinate_board(message,i,j):#receiving cordinate
                 return -1
             else:
                 continue
-    return int(number)
+    return int(number)-1
 def surrender(num):
     if num == -1:
 	    print("surrender")
+	    return True
 def othello():#surrender, score check, turn change, setting piece
-	board = create_board()
-	show_board(board)
-	cord_x = cordinate_board("row number(1~8):",1,8)
-	surrender(cord_x)
-	cord_y = cordinate_board("column number(1~8):",1,8)
-	surrender(cord_y)
+    board = create_board()
+    show_board(board)
+    while True :
+        while True:
+            cord_x = cordinate_board("row number(1~8):",1,8)
+            if surrender(cord_x):
+                break
+            cord_y = cordinate_board("column number(1~8):",1,8)
+            if surrender(cord_y):
+                break
+            if board[cord_x][cord_y]=='ㆍ':
+    	        board[cord_x][cord_y]= '●'
+    	        show_board(board)
+    	        break
+            else:
+                continue
+        while True:
+            cord_x = cordinate_board("row number(1~8):",1,8)
+            if surrender(cord_x):
+                break
+            cord_y = cordinate_board("column number(1~8):",1,8)
+            if surrender(cord_y):
+                break
+            if board[cord_x][cord_y]:
+                board[cord_x][cord_y]= '○'
+                show_board(board)
+                break
+            else:
+                continue
 othello()
