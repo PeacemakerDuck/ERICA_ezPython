@@ -1,18 +1,18 @@
 #Othello
 def check_scr(board):
     for i in range(0,8):
-        for j in range(2,6):
-            if board[i][j]==board[i][j-1]==board[i][j-2]==board[i][j+1]==board[i][j+2]=='●':
+        for j in range(1,7):
+            if board[i][j]==board[i][j-1]==board[i][j+1]=='● ':
                 print('Player1 wins!')
                 return '●'
-    for i in range(2,6):
+    for i in range(1,7):
         for j in range(0,8):
-            if board[i-2][j]==board[i-1][j]==board[i][j]==board[i+1][j]==board[i+2][j]=='●'
+            if board[i-1][j]==board[i][j]==board[i+1][j]=='● ':
                 print('Player1 wins!')
                 return '●'
-    for i in range(2,6):
-        for j in range(2,6):
-            if board[i-2][j-2]==board[i-1][j-1]==board[i][j]==board[i+1][j+1]==board[i+2][j+2]=='●':
+    for i in range(1,7):
+        for j in range(1,7):
+            if board[i-1][j-1]==board[i][j]==board[i+1][j+1]=='● ':
                 print('Player1 wins!')
                 return '●'
 def show_board(board):
@@ -32,10 +32,6 @@ def create_board():#creating board array
     for i in range(0,8):
         for j in range(0,8):
              board[i].append('ㆍ')
-    board[3][4]='●'
-    board[4][3]='●'
-    board[3][3]='○'
-    board[4][4]='○'
     return board
 def cordinate_board(message,i,j):#receiving cordinate
     while True:
@@ -63,6 +59,8 @@ def othello():#surrender, score check, turn change, setting piece
     show_board(board)
     while True :
         while True:
+            if check_scr(board)!= None:
+                break
             cord_x = cordinate_board("row number(1~8):",1,8)
             if surrender(cord_x):
                 break
@@ -70,12 +68,14 @@ def othello():#surrender, score check, turn change, setting piece
             if surrender(cord_y):
                 break
             if board[cord_x][cord_y]=='ㆍ':
-    	        board[cord_x][cord_y]= '●'
+    	        board[cord_x][cord_y]= '● '
     	        show_board(board)
     	        break
             else:
                 continue
         while True:
+            if check_scr(board)!= None:
+                break
             cord_x = cordinate_board("row number(1~8):",1,8)
             if surrender(cord_x):
                 break
@@ -83,9 +83,13 @@ def othello():#surrender, score check, turn change, setting piece
             if surrender(cord_y):
                 break
             if board[cord_x][cord_y]:
-                board[cord_x][cord_y]= '○'
+                board[cord_x][cord_y]= '○ '
                 show_board(board)
                 break
             else:
                 continue
+            if check_scr(board)!= None:
+                break
+        if check_scr(board)!= None:
+            break
 othello()
