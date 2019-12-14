@@ -1,23 +1,20 @@
 #Othello
-def check_sel(board,x,y):
-    try :
-        if board[x][y]=='●'
-            if board[x-1][y-1]=='○':return True
-            if board[x-1][y+1]=='○':return True
-            if board[x][y-1]=='○':return True
-            if board[x][y+1]=='○':return True
-            if board[x+1][y-1]=='○':return True
-            if board[x+1][y]=='○':return True
-            if board[x+1][y+1]=='○':return True
-        if board[x][y]=='○'
-            if board[x-1][y-1]=='●':return True
-            if board[x-1][y]=='●':return True
-            if board[x-1][y+1]=='●':return True
-            if board[x][y-1]=='●':return True
-            if board[x][y+1]=='●':return True
-            if board[x+1][y-1]=='●':return True
-            if board[x+1][y]=='●':return True
-            if board[x+1][y+1]=='●':return True
+def check_scr(board):
+    for i in range(0,8):
+        for j in range(2,6):
+            if board[i][j]==board[i][j-1]==board[i][j-2]==board[i][j+1]==board[i][j+2]=='●':
+                print('Player1 wins!')
+                return '●'
+    for i in range(2,6):
+        for j in range(0,8):
+            if board[i-2][j]==board[i-1][j]==board[i][j]==board[i+1][j]==board[i+2][j]=='●'
+                print('Player1 wins!')
+                return '●'
+    for i in range(2,6):
+        for j in range(2,6):
+            if board[i-2][j-2]==board[i-1][j-1]==board[i][j]==board[i+1][j+1]==board[i+2][j+2]=='●':
+                print('Player1 wins!')
+                return '●'
 def show_board(board):
     k_1=['①','②','③','④','⑤','⑥','⑦','⑧']
     i=0
