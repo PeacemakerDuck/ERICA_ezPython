@@ -1,20 +1,46 @@
 #Othello
+import random
+def load_quiz():
+    file = open("quiz.txt",r)
+    row = {}
+    for line in file:
+        no, quiiz, answer = line.strip('\n').split(',')
+        row[no] = [quiiz,answer]
+    file.close()
+    return row
+def quiz(row):
+    
 def check_scr(board):
     for i in range(0,8):
         for j in range(1,7):
             if board[i][j]==board[i][j-1]==board[i][j+1]=='● ':
                 print('Player1 wins!')
                 return '●'
+            elif board[i][j]==board[i][j-1]==board[i][j+1]=='○':
+                print('Player2 wins!')
+                return '○'
     for i in range(1,7):
         for j in range(0,8):
             if board[i-1][j]==board[i][j]==board[i+1][j]=='● ':
                 print('Player1 wins!')
                 return '●'
+            elif board[i-1][j]==board[i][j]==board[i+1][j]=='○':
+                print('Player2 wins!')
+                return '○'
     for i in range(1,7):
         for j in range(1,7):
             if board[i-1][j-1]==board[i][j]==board[i+1][j+1]=='● ':
                 print('Player1 wins!')
                 return '●'
+            elif board[i+1][j-1]==board[i][j]==board[i-1][j+1]=='●':
+                print('Player1 wins!')
+                return '●'
+            elif board[i-1][j-1]==board[i][j]==board[i+1][j+1]=='○':
+                print('Player2 wins!')
+                return '○'
+            elif board[i+1][j-1]==board[i][j]==board[i-1][j+1]=='○':
+                print('Player2 wins!')
+                return '○'
 def show_board(board):
     k_1=['①','②','③','④','⑤','⑥','⑦','⑧']
     i=0
@@ -57,10 +83,11 @@ def surrender(num):
 def othello():#surrender, score check, turn change, setting piece
     board = create_board()
     show_board(board)
+    row = load_quiz()
     while True :
+        if check_scr(board)!= None:
+            break
         while True:
-            if check_scr(board)!= None:
-                break
             cord_x = cordinate_board("row number(1~8):",1,8)
             if surrender(cord_x):
                 break
@@ -68,11 +95,16 @@ def othello():#surrender, score check, turn change, setting piece
             if surrender(cord_y):
                 break
             if board[cord_x][cord_y]=='ㆍ':
-    	        board[cord_x][cord_y]= '● '
-    	        show_board(board)
-    	        break
+                if quiz(row)==True:
+    	            board[cord_x][cord_y]= '● '
+    	            show_board(board)
+    	            break
+                else:
+                    continue
             else:
                 continue
+        if check_scr(board)!= None:
+            break
         while True:
             if check_scr(board)!= None:
                 break
@@ -83,9 +115,12 @@ def othello():#surrender, score check, turn change, setting piece
             if surrender(cord_y):
                 break
             if board[cord_x][cord_y]:
-                board[cord_x][cord_y]= '○ '
-                show_board(board)
-                break
+                if quiz(row)==True:
+                    board[cord_x][cord_y]= '○ '
+                    show_board(board)
+                    break
+                else:
+                    continue
             else:
                 continue
             if check_scr(board)!= None:
