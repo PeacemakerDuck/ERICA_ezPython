@@ -1,7 +1,7 @@
 #Othello
 import random
 def load_quiz():
-    file = open("quiz.txt",r)
+    file = open("quiz.txt","r")
     row = {}
     for line in file:
         no, quiiz, answer = line.strip('\n').split(',')
@@ -9,7 +9,12 @@ def load_quiz():
     file.close()
     return row
 def quiz(row):
-    
+    quiz = row[repr(random.randrange(1,4))]
+    answer = quiz[1]
+    if input(quiz[0])==answer:
+        return True
+    else:
+        return False
 def check_scr(board):
     for i in range(0,8):
         for j in range(1,7):
@@ -100,7 +105,9 @@ def othello():#surrender, score check, turn change, setting piece
     	            show_board(board)
     	            break
                 else:
-                    continue
+                    board[cord_x][cord_y]= '○ '
+                    show_board(board)
+                    break
             else:
                 continue
         if check_scr(board)!= None:
@@ -120,7 +127,9 @@ def othello():#surrender, score check, turn change, setting piece
                     show_board(board)
                     break
                 else:
-                    continue
+                    board[cord_x][cord_y]= '● '
+                    show_board(board)
+                    break
             else:
                 continue
             if check_scr(board)!= None:
