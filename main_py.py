@@ -19,32 +19,32 @@ def check_scr(board):
     for i in range(0,8):
         for j in range(1,7):
             if board[i][j]==board[i][j-1]==board[i][j+1]=='● ':
-                print('Player1 wins!')
+                print('플레이어 ●  승리!')
                 return '●'
-            elif board[i][j]==board[i][j-1]==board[i][j+1]=='○':
-                print('Player2 wins!')
+            elif board[i][j]==board[i][j-1]==board[i][j+1]=='○ ':
+                print('플레이어 ○  승리!')
                 return '○'
     for i in range(1,7):
         for j in range(0,8):
             if board[i-1][j]==board[i][j]==board[i+1][j]=='● ':
-                print('Player1 wins!')
+                print('플레이어 ●  승리!')
                 return '●'
-            elif board[i-1][j]==board[i][j]==board[i+1][j]=='○':
-                print('Player2 wins!')
+            elif board[i-1][j]==board[i][j]==board[i+1][j]=='○ ':
+                print('플레이어 ○  승리!')
                 return '○'
     for i in range(1,7):
         for j in range(1,7):
             if board[i-1][j-1]==board[i][j]==board[i+1][j+1]=='● ':
-                print('Player1 wins!')
+                print('플레이어 ●  승리!')
                 return '●'
             elif board[i+1][j-1]==board[i][j]==board[i-1][j+1]=='●':
-                print('Player1 wins!')
+                print('플레이어 ●  승리!')
                 return '●'
             elif board[i-1][j-1]==board[i][j]==board[i+1][j+1]=='○':
-                print('Player2 wins!')
+                print('플레이어 ○  승리!')
                 return '○'
             elif board[i+1][j-1]==board[i][j]==board[i-1][j+1]=='○':
-                print('Player2 wins!')
+                print('플레이어 ○  승리!')
                 return '○'
 def show_board(board):
     k_1=['①','②','③','④','⑤','⑥','⑦','⑧']
@@ -93,10 +93,11 @@ def othello():#surrender, score check, turn change, setting piece
         if check_scr(board)!= None:
             break
         while True:
-            cord_x = cordinate_board("row number(1~8):",1,8)
+            print("플레이어 ●  차례")
+            cord_x = cordinate_board("세로 번호(1~8):",1,8)
             if surrender(cord_x):
                 break
-            cord_y = cordinate_board("column number(1~8):",1,8)
+            cord_y = cordinate_board("가로 번호(1~8):",1,8)
             if surrender(cord_y):
                 break
             if board[cord_x][cord_y]=='ㆍ':
@@ -105,6 +106,7 @@ def othello():#surrender, score check, turn change, setting piece
     	            show_board(board)
     	            break
                 else:
+                    print("Wrong!")
                     board[cord_x][cord_y]= '○ '
                     show_board(board)
                     break
@@ -115,10 +117,11 @@ def othello():#surrender, score check, turn change, setting piece
         while True:
             if check_scr(board)!= None:
                 break
-            cord_x = cordinate_board("row number(1~8):",1,8)
+            print("플레이어 ○  차례")
+            cord_x = cordinate_board("세로 번호(1~8):",1,8)
             if surrender(cord_x):
                 break
-            cord_y = cordinate_board("column number(1~8):",1,8)
+            cord_y = cordinate_board("가로 번호(1~8):",1,8)
             if surrender(cord_y):
                 break
             if board[cord_x][cord_y]:
@@ -127,6 +130,7 @@ def othello():#surrender, score check, turn change, setting piece
                     show_board(board)
                     break
                 else:
+                    print("Wrong!")
                     board[cord_x][cord_y]= '● '
                     show_board(board)
                     break
