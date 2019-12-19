@@ -9,12 +9,22 @@ def load_quiz():
     file.close()
     return row
 def quiz(row):
-    quiz = row[repr(random.randrange(1,4))]
-    answer = quiz[1]
-    if input(quiz[0])==answer:
-        return True
+    num = random.randrange(1,64)
+    if num>20:
+        b=random.randrange(11,45)
+        c=random.randrange(50,200)
+        answer = b*c
+        if int(input("산수 :"+repr(b)+"x"+repr(c)+"= ?"))==answer:
+            return True
+        else:
+            return False
     else:
-        return False
+        quiz = row[repr(num)]
+        answer = quiz[1]
+        if input(quiz[0])==answer:
+            return True
+        else:
+            return False
 def check_scr(board):
     for i in range(0,8):
         for j in range(1,7):
@@ -124,7 +134,7 @@ def othello():#surrender, score check, turn change, setting piece
             cord_y = cordinate_board("가로 번호(1~8):",1,8)
             if surrender(cord_y):
                 break
-            if board[cord_x][cord_y]:
+            if board[cord_x][cord_y]=='ㆍ':
                 if quiz(row)==True:
                     board[cord_x][cord_y]= '○ '
                     show_board(board)
