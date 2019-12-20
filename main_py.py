@@ -10,14 +10,20 @@ def load_quiz():
     return row
 def quiz(row):
     num = random.randrange(1,64)
-    if num>20:
+    if 43>num>11:
         b=random.randrange(11,45)
-        c=random.randrange(50,200)
+        c=random.randrange(50,100)
         answer = b*c
         if int(input("산수 :"+repr(b)+"x"+repr(c)+"= ?"))==answer:
             return True
-        else:
-            return False
+        else: return False
+    elif num>42:
+        b=random.randrange(555,2333)
+        c=random.randrange(111,444)
+        answer = b-c
+        if int(input("산수 :"+repr(b)+"-"+repr(c)+"= ?"))==answer:
+            return True
+        else: return False
     else:
         quiz = row[repr(num)]
         answer = quiz[1]
@@ -82,18 +88,17 @@ def cordinate_board(message,i,j):#receiving cordinate
                 number = input('\nType the number in range.\n\n'+ message)
             break
         except ValueError:
-            print('\nType in the Integer value.\n\n')
+            print('\n정수값을 입력하세요.\n\n')
         except KeyboardInterrupt:
-            choice=input('\nSurrender(y/n):')
+            choice=input('\n항복하시겠습니까?(y/n):')
             if choice=='y':
-                print('\nSurrender\n')
                 return -1
             else:
                 continue
     return int(number)-1
-def surrender(num):
+def surrender(win,lose,num):
     if num == -1:
-	    print("surrender")
+	    print("플레이어"+lose+"이 항복했습니다.\n플레이어"+win+"승리!")
 	    return True
 def othello():#surrender, score check, turn change, setting piece
     board = create_board()
@@ -105,10 +110,10 @@ def othello():#surrender, score check, turn change, setting piece
         while True:
             print("플레이어 ●  차례")
             cord_x = cordinate_board("세로 번호(1~8):",1,8)
-            if surrender(cord_x):
+            if surrender(,"● ",cord_x):
                 break
             cord_y = cordinate_board("가로 번호(1~8):",1,8)
-            if surrender(cord_y):
+            if surrender(,"● ",cord_y):
                 break
             if board[cord_x][cord_y]=='ㆍ':
                 if quiz(row)==True:
@@ -116,11 +121,12 @@ def othello():#surrender, score check, turn change, setting piece
     	            show_board(board)
     	            break
                 else:
-                    print("Wrong!")
+                    print("\n## Wrong! ##")
                     board[cord_x][cord_y]= '○ '
                     show_board(board)
                     break
             else:
+                print("\n##이미 돌이 놓여있는 위치입니다.##\n")
                 continue
         if check_scr(board)!= None:
             break
@@ -129,10 +135,10 @@ def othello():#surrender, score check, turn change, setting piece
                 break
             print("플레이어 ○  차례")
             cord_x = cordinate_board("세로 번호(1~8):",1,8)
-            if surrender(cord_x):
+            if surrender(● ,cord_x):
                 break
             cord_y = cordinate_board("가로 번호(1~8):",1,8)
-            if surrender(cord_y):
+            if surrender(● ,cord_y):
                 break
             if board[cord_x][cord_y]=='ㆍ':
                 if quiz(row)==True:
@@ -140,11 +146,12 @@ def othello():#surrender, score check, turn change, setting piece
                     show_board(board)
                     break
                 else:
-                    print("Wrong!")
+                    print("\n## 답이 틀렸습니다! 상대편의 돌이 놓아집니다. ##\n")
                     board[cord_x][cord_y]= '● '
                     show_board(board)
                     break
             else:
+                print("\n##이미 돌이 놓여있는 위치입니다.##\n")
                 continue
             if check_scr(board)!= None:
                 break
