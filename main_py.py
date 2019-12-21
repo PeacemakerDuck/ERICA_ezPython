@@ -14,7 +14,7 @@ def quiz(row):
     if 22>num>11:
         b=random.randrange(11,45)
         c=random.randrange(50,100)
-        answer = repr(e*c)
+        answer = repr(b*c)
         if input("산수 :"+repr(b)+"x"+repr(c)+"= ?")==answer:
             return True
         else: return False
