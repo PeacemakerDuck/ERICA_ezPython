@@ -1,4 +1,5 @@
 #Othello
+import time
 import random
 def load_quiz():
     file = open("quiz.txt","r")
@@ -9,19 +10,19 @@ def load_quiz():
     file.close()
     return row
 def quiz(row):
-    num = random.randrange(1,64)
-    if 43>num>11:
+    num = random.randrange(1,33)
+    if 22>num>11:
         b=random.randrange(11,45)
         c=random.randrange(50,100)
-        answer = b*c
-        if int(input("산수 :"+repr(b)+"x"+repr(c)+"= ?"))==answer:
+        answer = repr(e*c)
+        if input("산수 :"+repr(b)+"x"+repr(c)+"= ?")==answer:
             return True
         else: return False
-    elif num>42:
+    elif num>21:
         b=random.randrange(555,2333)
         c=random.randrange(111,444)
-        answer = b-c
-        if int(input("산수 :"+repr(b)+"-"+repr(c)+"= ?"))==answer:
+        answer = rept(b-c)
+        if input("산수 :"+repr(b)+"-"+repr(c)+"= ?")==answer:
             return True
         else: return False
     else:
@@ -73,6 +74,7 @@ def show_board(board):
 				,board[i][3],board[i][4],board[i][5],board[i][6]\
 				,board[i][7])
 	    i+=1
+    print("-> ctrl+c = 항복")
     print()
 def create_board():#creating board array
     board=[[],[],[],[],[],[],[],[]]
@@ -85,7 +87,7 @@ def cordinate_board(message,i,j):#receiving cordinate
         try :
             number = input(message+' ')
             while not int(number) in range(i,j+1): 
-                number = input('\nType the number in range.\n\n'+ message)
+                number = input('\n범위안의 숫자를 입력하세요.\n\n'+ message)
             break
         except ValueError:
             print('\n정수값을 입력하세요.\n\n')
@@ -96,32 +98,45 @@ def cordinate_board(message,i,j):#receiving cordinate
             else:
                 continue
     return int(number)-1
+def load(n):
+    if n>0:
+        print("-> ....")
+        time.sleep(1)
+        load(n-1)
+    else:
+        return
 def surrender(win,lose,num):
     if num == -1:
-	    print("플레이어"+lose+"이 항복했습니다.\n플레이어"+win+"승리!")
+	    print("\n플레이어"+lose+"이 항복했습니다.\n\n플레이어"+win+"승리!")
 	    return True
 def othello():#surrender, score check, turn change, setting piece
     board = create_board()
-    show_board(board)
     row = load_quiz()
+    load(2)
+    print("\n___---TIK-TAK-TO---___\n")
+    time.sleep(1)
+    print("\n-> Loading\n")
+    load(3)
+    show_board(board)
     while True :
         if check_scr(board)!= None:
             break
         while True:
             print("플레이어 ●  차례")
             cord_x = cordinate_board("세로 번호(1~8):",1,8)
-            if surrender(,"● ",cord_x):
-                break
+            if surrender('○ ',"● ",cord_x):
+                return
             cord_y = cordinate_board("가로 번호(1~8):",1,8)
-            if surrender(,"● ",cord_y):
-                break
+            if surrender('○ ',"● ",cord_y):
+                return
             if board[cord_x][cord_y]=='ㆍ':
                 if quiz(row)==True:
     	            board[cord_x][cord_y]= '● '
     	            show_board(board)
     	            break
                 else:
-                    print("\n## Wrong! ##")
+                    print("\n## 답이 틀렸습니다! 상대편의 돌이 놓아집니다. ##")
+                    time.sleep(1)
                     board[cord_x][cord_y]= '○ '
                     show_board(board)
                     break
@@ -135,11 +150,11 @@ def othello():#surrender, score check, turn change, setting piece
                 break
             print("플레이어 ○  차례")
             cord_x = cordinate_board("세로 번호(1~8):",1,8)
-            if surrender(● ,cord_x):
-                break
+            if surrender("● ",'○ ',cord_x):
+                return
             cord_y = cordinate_board("가로 번호(1~8):",1,8)
-            if surrender(● ,cord_y):
-                break
+            if surrender("● ",'○ ',cord_y):
+                return
             if board[cord_x][cord_y]=='ㆍ':
                 if quiz(row)==True:
                     board[cord_x][cord_y]= '○ '
@@ -147,6 +162,7 @@ def othello():#surrender, score check, turn change, setting piece
                     break
                 else:
                     print("\n## 답이 틀렸습니다! 상대편의 돌이 놓아집니다. ##\n")
+                    time.sleep(1)
                     board[cord_x][cord_y]= '● '
                     show_board(board)
                     break
