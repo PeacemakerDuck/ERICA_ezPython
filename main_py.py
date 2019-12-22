@@ -21,7 +21,7 @@ def quiz(row):
     elif num>21:
         b=random.randrange(555,2333)
         c=random.randrange(111,444)
-        answer = rept(b-c)
+        answer = repr(b-c)
         if input("산수 :"+repr(b)+"-"+repr(c)+"= ?")==answer:
             return True
         else: return False
@@ -54,13 +54,13 @@ def check_scr(board):
             if board[i-1][j-1]==board[i][j]==board[i+1][j+1]=='● ':
                 print('플레이어 ●  승리!')
                 return '●'
-            elif board[i+1][j-1]==board[i][j]==board[i-1][j+1]=='●':
+            elif board[i+1][j-1]==board[i][j]==board[i-1][j+1]=='● ':
                 print('플레이어 ●  승리!')
                 return '●'
-            elif board[i-1][j-1]==board[i][j]==board[i+1][j+1]=='○':
+            elif board[i-1][j-1]==board[i][j]==board[i+1][j+1]=='○ ':
                 print('플레이어 ○  승리!')
                 return '○'
-            elif board[i+1][j-1]==board[i][j]==board[i-1][j+1]=='○':
+            elif board[i+1][j-1]==board[i][j]==board[i-1][j+1]=='○ ':
                 print('플레이어 ○  승리!')
                 return '○'
 def show_board(board):
