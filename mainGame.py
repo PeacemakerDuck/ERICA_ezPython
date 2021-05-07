@@ -1,4 +1,5 @@
 #Othello
+import tiktakto_func
 def tiktakto():#surrender, score check, turn change, setting piece
     board = create_board()
     row = load_quiz()
